@@ -1,15 +1,21 @@
 package com.algaworks.crm.modal;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 
-@Embeddable
-public class Address {
+@Entity
+public class Address implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	private String publicPlace;
 
-	private BigDecimal numberAddress;
+	private int numberAddress;
 
 	private String complement;
 
@@ -21,7 +27,6 @@ public class Address {
 
 	private String state;
 
-
 	public String getPublicPlace() {
 		return publicPlace;
 	}
@@ -30,11 +35,11 @@ public class Address {
 		this.publicPlace = publicPlace;
 	}
 
-	public BigDecimal getNumberAddress() {
+	public int getNumberAddress() {
 		return numberAddress;
 	}
 
-	public void setNumberAddress(BigDecimal numberAddress) {
+	public void setNumberAddress(int numberAddress) {
 		this.numberAddress = numberAddress;
 	}
 

@@ -1,46 +1,44 @@
 package com.algaworks.crm.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.algaworks.crm.modal.Categorie;
-import com.algaworks.crm.repository.CategoriesRepository;
+import com.algaworks.crm.repository.CategorieRepository;
 
 @RestController
 @RequestMapping("/categorie")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class CategorieController {
 	
 	@Autowired
-	CategoriesRepository repository; 
+	private CategorieRepository  categorieRepository;
 	
 	@GetMapping
-	public List<Categorie> getAllCategories(){
-		return repository.findAll(); 
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<?> getAllCategories(){
+		return ResponseEntity.ok(categorieRepository.findAll());
 	}
 	
 	@GetMapping("/{code}")
-	public Categorie getCategorieById(@PathVariable Long code) {
-		 Optional<Categorie> categorie = repository.findById(code);
-		 return categorie.get(); 
+	public Categorie getCategorieByIdCategorie(@PathVariable Long code) {
+		 Optional<Categorie> categorie = categorieRepository.findById(code);
+		 return categorie.get();
 	}
 	
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public Categorie saveCategorie(@RequestBody Categorie categorie) {
-		return repository.save(categorie); 
+		return categorieRepository.save(categorie);
 	}
 	
 	@DeleteMapping("/{code}")
 	public void deleteCategorie(@PathVariable Long code) {
-		repository.deleteById(code); 
+		categorieRepository.deleteById(code);
 	}
 	
 }

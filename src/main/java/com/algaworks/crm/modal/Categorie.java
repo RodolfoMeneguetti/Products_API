@@ -1,18 +1,24 @@
 package com.algaworks.crm.modal;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Categorie {
-	
+public class Categorie implements Serializable {
+
+	@Serial
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private  Long code; 
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long code;
 	private String categorie;
-	
+
 	public Long getCode() {
 		return code;
 	}
@@ -28,7 +34,5 @@ public class Categorie {
 	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
-	
-	
-	 
+
 }

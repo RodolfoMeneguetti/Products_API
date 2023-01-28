@@ -1,22 +1,22 @@
 package com.algaworks.crm.modal;
 
-import jakarta.persistence.Embedded;
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class People {
+public class People implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
-
-	@Embedded
-	private Address address;
 
 
 	public Long getCode() {
@@ -33,14 +33,6 @@ public class People {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
 	}
 
 }
